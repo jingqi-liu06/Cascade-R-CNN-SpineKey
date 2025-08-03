@@ -22,7 +22,7 @@ model = dict(
         style="pytorch",
         init_cfg=dict(
             type="Pretrained",
-            checkpoint="/home/srt19/program_now/vertebra-det/resnext101_64x4d-ee2c6f71.pth", # 修改为你的预训练模型路径
+            checkpoint="../checkpoints/resnext101_64x4d.pth", # change to your pretrained model path
         ),
     ),
     neck=dict(
@@ -232,8 +232,9 @@ model = dict(
 )
 
 # dataset settings
-dataset_type = "CocoDataset"
-data_root = "/hdd/srt19/data/xray/x_ray/xray_yuanshi/"  # 修改为你的数据集路径
+dataset_type = "CocoDataset" # user-defined dataset type
+# dataset_type = "CocoDataset"  --- IGNORE ---
+data_root = "../data/xray_yuanshi/"  # change to your dataset path
 backend_args = None
 
 train_pipeline = [
@@ -341,8 +342,8 @@ optim_wrapper = dict(
 )
 
 auto_scale_lr = dict(
-    enable=True,  # 我们已经手动设置了学习率，所以保持False
-    base_batch_size=24  # 改为与我们实际的总batch size相匹配
+    enable=True,  # We have manually set the learning rate, so keep it as False
+    base_batch_size=24  # Change to match our actual total batch size
 )
 
 # default runtime
@@ -377,5 +378,5 @@ visualizer = dict(
 log_processor = dict(type="LogProcessor", window_size=50, by_epoch=True)
 
 log_level = "INFO"
-load_from = "/home/srt19/jingqi/X_ray_jingqi/mmdetection/cascade_mask_rcnn_x101_64x4d_fpn_mstrain_3x_coco_20210719_210311-d3e64ba0.pth" # 修改为你的预训练模型路径
+load_from = "../checkpoints/cascade_mask_rcnn_x101_64x4d_fpn_mstrain_3x_coco.pth" # Change to your pretrained model path
 resume = False
